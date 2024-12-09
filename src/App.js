@@ -1,31 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-import { useContext } from 'react';
-import Vasarloter from './components/Vasarloter';
-import { ApiContext } from './context/ApiContext';
-import { KosarContext } from './context/KosarContext';
-import KosarCanvas from './components/kosar/KosarCanvas';
+import Public from "./pages/Public";
+import Admin from "./pages/Admin";
+import NoPage from "./pages/NoPage";
+import Linkek from "./pages/Linkek";
 
-function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-  const { termekLista } = useContext(ApiContext);
-  const {kosarLista} = useContext(KosarContext);
+
+
+
+export default function App() {
 
   return (
+    <div className="">
 
-      <main className='pt-5'>
-        <header className='bg-primary text-white py-3 fixed-top'>
-          <KosarCanvas kosarLista={kosarLista}/>
-          <h1 className='text-center'>Fakestore Store 🐱‍👤</h1>
-        </header>
-        <article>
-            <Vasarloter termekLista={termekLista}/>
-        </article>
-        <footer>
+      <BrowserRouter>
+        <Routes>
 
-        </footer>
-      </main>
+            <Route path="/" element={<Linkek />}> 
+            <Route index element={<Public />} />
+            <Route path="admin" element={<Admin />} />
+            <Route path="*" element={<NoPage />} />
+            </Route>
+
+        </Routes>
+      </BrowserRouter>
+
+    </div>
   );
 }
-
-export default App;
